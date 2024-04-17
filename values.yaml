@@ -18,7 +18,7 @@ gcpCredentialSecret:
 
 global:
   # backendReplicaCount decides the replica count for rudder backend and postgresql containers
-  backendReplicaCount: 1
+  backendReplicaCount: 3
   imagePullSecrets: []
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -53,9 +53,11 @@ backend:
     targetPort: 8080
   resources:
     requests:
-      memory: 512Mi
+      memory: 1Gi  # Increase this if your application needs more memory to start
+      cpu: 1  # Increase this if your application needs more CPU to start
     limits:
-      memory: 1Gi
+      memory: 1Gi  # Increase this if your application is hitting the memory limit and getting killed
+      cpu: 1  # Increase this if your application is hitting the CPU limit
 
   nodeSelector: {}
 
@@ -117,7 +119,7 @@ transformer:
       memory: 512Mi  # Increase this if your application needs more memory to start
       cpu: 500m  # Increase this if your application needs more CPU to start
     limits:
-      memory: 1Gi  # Increase this if your application is hitting the memory limit and getting killed
+      memory: 2Gi  # Increase this if your application is hitting the memory limit and getting killed
       cpu: 1  # Increase this if your application is hitting the CPU limit
 
 serviceAccount:

@@ -73,7 +73,12 @@ spec:
             path: /health
             port: {{ .Values.backend.service.targetPort }}
         resources:
-          {{- toYaml .Values.backend.resources | nindent 10 }}
+          requests:
+            cpu: {{ .Values.backend.resources.requests.cpu }}
+            memory: {{ .Values.backend.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.backend.resources.limits.cpu }}
+            memory: {{ .Values.backend.resources.limits.memory }}
         env:
           {{- if .Values.backend.extraEnvVars }}
             {{- .Values.backend.extraEnvVars | toYaml | nindent 10 }}
