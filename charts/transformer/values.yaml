@@ -23,11 +23,11 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 1
-    memory: 1Gi
+    cpu: 3
+    memory: 2Gi
   requests:
-    cpu: 500m
-    memory: 512Mi
+    cpu: 3
+    memory: 2Gi
 extraEnvVars:
   - name: CONFIG_BACKEND_URL
     value: "https://api.rudderlabs.com"

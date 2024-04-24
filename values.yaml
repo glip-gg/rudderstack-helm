@@ -53,11 +53,11 @@ backend:
     targetPort: 8080
   resources:
     requests:
-      memory: 1Gi  # Increase this if your application needs more memory to start
-      cpu: 1  # Increase this if your application needs more CPU to start
+      memory: 4Gi  # Increase this if your application needs more memory to start
+      cpu: 2  # Increase this if your application needs more CPU to start
     limits:
-      memory: 1Gi  # Increase this if your application is hitting the memory limit and getting killed
-      cpu: 1  # Increase this if your application is hitting the CPU limit
+      memory: 4Gi  # Increase this if your application is hitting the memory limit and getting killed
+      cpu: 2  # Increase this if your application is hitting the CPU limit
 
   nodeSelector: {}
 
@@ -105,6 +105,19 @@ backend:
       # DO NOT REMOVE - Mandatory env for Shopify
     - name: RSERVER_GATEWAY_WEBHOOK_SOURCE_LIST_FOR_PARSING_PARAMS
       value: Shopify
+    - name: RSERVER_JOBS_DB_DS_LIMIT
+      value: "10"
+    - name: RSERVER_JOBS_DB_QUERY_REQUEST_TIMEOUT
+      value: "1800s"
+    - name: RSERVER_JOBS_DB_BACKUP_ENABLED
+      value: "false"
+    - name: RSERVER_PROCESSOR_FIXED_LOOP_SLEEP_IN_MS
+      value: "2000"
+    - name: RSERVER_ROUTER_FIXED_LOOP_SLEEP_IN_MS
+      value: "3000"
+    - name: RSERVER_ARCHIVAL_ENABLED
+      value: "false"
+      
 
 transformer:
   replicaCount: 2
@@ -115,12 +128,12 @@ transformer:
     version: latest
     pullPolicy: Always
   resources:
-    requests:
-      memory: 512Mi  # Increase this if your application needs more memory to start
-      cpu: 500m  # Increase this if your application needs more CPU to start
     limits:
-      memory: 2Gi  # Increase this if your application is hitting the memory limit and getting killed
-      cpu: 1  # Increase this if your application is hitting the CPU limit
+      cpu: 3
+      memory: 1.5Gi
+    requests:
+      cpu: 3
+      memory: 1.5Gi
 
 serviceAccount:
   # -- Enable service account creation.
@@ -168,11 +181,11 @@ telegraf_sidecar:
     pullPolicy: IfNotPresent
   resources:
     requests:
-      memory: 128Mi
-      cpu: 100m
+      memory: 256Mi
+      cpu: 300m
     limits:
-      memory: 128Mi
-      cpu: 100m
+      memory: 256Mi
+      cpu: 300m
   config:
     mountPath: /etc/telegraf
     agent:
