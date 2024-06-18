@@ -159,10 +159,10 @@ transformer:
   resources:
     limits:
       cpu: 3
-      memory: 1.5Gi
+      memory: 2Gi
     requests:
       cpu: 3
-      memory: 1.5Gi
+      memory: 2Gi
 
 serviceAccount:
   # -- Enable service account creation.
