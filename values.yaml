@@ -73,6 +73,7 @@ backend:
   # -- Annotations to be added to backend pods
   podAnnotations: {}
 
+
   nodeSelector: {}
 
   persistence:
